@@ -139,4 +139,68 @@ describe('UserEntity integration tests', () => {
          new UserEntity(valid);
       });
    });
+
+   describe('updateName method', () => {
+      it('Should throw an error when updating a user with a invalid name - null', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updateName(null as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid name - empty', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updateName('' as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid name - no string', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updateName(10 as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid name - larger', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updateName('a'.repeat(256) as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should a valid user', () => {
+         expect.assertions(0);
+         const user = new UserEntity(props);
+         user.updateName('new name');
+      });
+   });
+
+   describe('updatePassword method', () => {
+      it('Should throw an error when updating a user with a invalid password - null', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updatePassword(null as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid password - empty', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updatePassword('' as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid password - no string', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updatePassword(10 as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should throw an error when updating a user with a invalid password - larger', () => {
+         const user = new UserEntity(props);
+
+         expect(() => user.updatePassword('a'.repeat(101) as any)).toThrow(EntityValidationError);
+      });
+
+      it('Should a valid user', () => {
+         expect.assertions(0);
+         const user = new UserEntity(props);
+         user.updatePassword('new password');
+      });
+   });
 });
